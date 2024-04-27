@@ -79,6 +79,14 @@ GCN::GCN(GCNParams params, GCNData *input_data) {
     layer1_weight->glorot(params.input_dim, params.hidden_dim); // weights initilization
     
     // sparsematmul
+
+    // std::cout << "m: " << params.num_nodes << std::endl;
+    // std::cout << "n: " << params.input_dim << std::endl;
+    // std::cout << "p: " << params.hidden_dim << std::endl;
+    // std::cout << "size a: " << input->data.size() << std::endl;
+    // std::cout << "size b: " << layer1_weight->data.size() << std::endl;
+    // std::cout << "size c: " << layer1_var1->data.size() << std::endl;
+
     modules.push_back(new SparseMatmul(input, layer1_weight, layer1_var1, &data->feature_index, params.num_nodes, params.input_dim, params.hidden_dim));
     variables.emplace_back(params.num_nodes * params.hidden_dim);
     Variable *layer1_var2 = &variables.back();

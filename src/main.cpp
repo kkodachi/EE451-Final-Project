@@ -1,6 +1,7 @@
 #include "../include/module.h"
 #include "../include/optim.h"
 #include "../include/parser.h"
+#include <chrono>
 
 using namespace std;
 
@@ -22,9 +23,12 @@ int main(int argc, char **argv) {
         std::cerr << "Cannot read input: " << input_name << std::endl;
         exit(EXIT_FAILURE);
     }
-
-
+    std::cout << "Starting time here" << std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
     GCN gcn(params, &data); // Create and initialize and object of type GCN.
     gcn.run(); // Run the main function of the model in order to train and validate the solution.
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration = end - start;
+    std::cout << "Total time: " << duration.count() << " ms" << std::endl;
     return EXIT_SUCCESS;
 }

@@ -46,9 +46,15 @@ void Matmul::backward() {
 SparseMatmul::SparseMatmul(Variable *a, Variable *b, Variable *c, SparseIndex *sp, int m, int n, int p) :
         a(a), b(b), c(c), sp(sp), m(m), n(n), p(p) {}
 
+// m = rows a,c
+// n = cols a, rows b
+// p = cols b,c
+
 void SparseMatmul::forward(bool training) {
     timer_start(TMR_SPMATMUL_FW);
     c->zero();
+    // printf("m,p,n,indptrsize : %d,%d,%d,%d",m,p,n,sp->indptr.size());
+    std::cout<< "indptr[0-4] "<< sp->indptr[0] << " " << sp->indptr[1] << " " << sp->indptr[2] << " " << sp->indptr[3] << std::endl;
     for (int i = 0; i < sp->indptr.size() - 1; i++)
         for (int jj = sp->indptr[i]; jj < sp->indptr[i + 1]; jj++) {
             int j = sp->indices[jj];
@@ -61,7 +67,8 @@ void SparseMatmul::forward(bool training) {
 void SparseMatmul::backward() {
     timer_start(TMR_SPMATMUL_BW);
     b->zero_grad();
-    int row = 0;
+    // int row = 0;
+    // printf("m,p,n,indptrsize : %d,%d,%d,%d",m,p,n,sp->indptr.size());
     for (int i = 0; i < sp->indptr.size() - 1; i++)
         for (int jj = sp->indptr[i]; jj < sp->indptr[i + 1]; jj++) {
             int j = sp->indices[jj];

@@ -1,4 +1,6 @@
-#include <immintrin.h>
+// #include <immintrin.h>
+#include <iostream>
+#include <cstdlib>
 #include "../include/rand.h"
 
 uint64_t rand_state[2];
@@ -17,6 +19,7 @@ void init_rand_state() {
 uint32_t xorshift128plus(uint64_t* state) {
     uint64_t t = state[0];
     uint64_t const s = state[1];
+    // assert(t && s);
     assert(t && s);
     state[0] = s;
     t ^= t << 23;		// a

@@ -1,6 +1,6 @@
-This project focuses on parallelizing GCNs for recommendation systems. Since the goal of this project is the compare the speed of parallel and serial implementations we used a implementation of a GCN by Thomas Kipf as a serial baseline and made adjustments as needed for our parallelization. Links to all references and resources used can be found below. Other aspects of the GCN model have been modified for our needs but the changes we made are mainly in module.cu. The following is a brief summary our of results.
+This project focuses on parallelizing GCNs for recommendation systems. Since the goal of this project is the compare the speed of parallel and serial implementations we used a implementation of a GCN by Thomas Kipf as a serial baseline and made adjustments as needed for our parallelization. Links to all references and resources used can be found in the project report. Other aspects of the GCN model have been modified for our needs but the changes we made are mainly in module.cu. The following is a brief summary our of results.
 
-This was the time for training on 100 epochs.
+This was the time for training on 100 epochs. Refer to the project report for the full analysis and report.
 
 Serial MM:
     pubmed: 13070.6 ms
@@ -13,15 +13,22 @@ Serial CSR MM:
     cora: 465.893 ms
 
 Parallel MM:
-    pubmed: 
-    citeseer: 
-    cora: 
+    pubmed: 2425.62 ms
+    citeseer: 377.448 ms
+    cora: 292.327 ms
 
 Parallel CSR MM:
-    pubmed: 
-    citeseer: 
-    cora: 
+    pubmed: 2309.39 ms
+    citeseer: 360.57 ms
+    cora: 282.32 ms
 
-References:
+Full Parallel Implementation:
+    pubmed: 1332.05 ms
+    citeseer: 220.166 ms
+    cora: 133.126 ms
 
-https://tkipf.github.io/graph-convolutional-networks/
+This project was run on CARC with the following commands (call the first two once):
+$ module load nvidia-hpc-sdk
+$ module load gcc/8.3.0
+$ make
+$ ./exec/gcn-seq <name of data>

@@ -26,7 +26,7 @@ pubmed: 2309.39 ms
 citeseer: 360.57 ms  
 cora: 282.32 ms  
 
-Full Parallel Implementation: 
-pubmed: 1332.05 ms 
-citeseer: 220.166 ms 
-cora: 133.126 ms 
+Full Parallel Implementation:  
+pubmed: 1332.05 ms  
+citeseer: 220.166 ms  
+cora: 133.126 ms  
